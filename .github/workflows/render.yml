@@ -17,8 +17,13 @@ jobs:
           cache: 'npm'
 
       - name: Install Dependencies
-        run: npm install
-
+        run: |
+          if [ -f package-lock.json ]; then
+            npm ci
+          else
+            npm install
+          fi
+          
       - name: Render Video
         run: npx remotion render index.ts HelloWorld out/video.mp4
 
