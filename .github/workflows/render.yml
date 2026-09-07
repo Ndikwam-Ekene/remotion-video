@@ -6,7 +6,6 @@ on:
 jobs:
   make-video:
     runs-on: ubuntu-latest
-
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v4
@@ -17,7 +16,8 @@ jobs:
           node-version: 18
 
       - name: Install Dependencies
-        run: npm ci --include=optional
+        run: |
+          npm ci || npm install
 
       - name: Render Video
         run: npx remotion render index.ts HelloWorld out/video.mp4
@@ -27,3 +27,4 @@ jobs:
         with:
           name: rendered-video
           path: out/video.mp4
+	
