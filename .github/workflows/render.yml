@@ -6,6 +6,7 @@ on:
 jobs:
   make-video:
     runs-on: ubuntu-latest
+
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v4
@@ -13,13 +14,12 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: 18
+          node-version: 22
+          cache: npm
 
       - name: Install Dependencies
-        run: |
-          rm -rf package-lock.json
-            npm install
-            
+        run: npm ci --include=optional
+
       - name: Render Video
         run: npx remotion render index.ts HelloWorld out/video.mp4
 
