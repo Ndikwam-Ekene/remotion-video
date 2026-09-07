@@ -17,12 +17,9 @@ jobs:
 
       - name: Install Dependencies
         run: |
-          if [ -f package-lock.json ]; then
-            npm ci
-          else
+          rm -rf package-lock.json
             npm install
-          fi
-          
+            
       - name: Render Video
         run: npx remotion render index.ts HelloWorld out/video.mp4
 
